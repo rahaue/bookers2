@@ -1,0 +1,39 @@
+
+ 
+ <h2>User info</h2>
+ 
+  <% if @user && @user.errors.any? %>
+  <div id="error_explanation">
+    <h3>
+      <%= pluralize(@user.errors.count, "error") %> prohibited this obj from being saved:
+    </h3>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+ 
+ <%= form_with url:user_path(@user.id), model:@user, class:"edit_user", local:true do |f| %>
+
+  <div class="field">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile_image, "Image" %>
+    <%= f.attachment_field :profile_image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction, "Introduction" %>
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update User" %>
+  </div>
+  
+<% end %>
